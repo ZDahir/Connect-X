@@ -7,48 +7,74 @@
 
 import SwiftUI
 
+struct WinCountStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                ZStack {
+                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.blue, lineWidth: 2)
+                }
+            )
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            .shadow(radius: 5)
+    }
+}
+
+extension View {
+    func winCountStyle() -> some View {
+        self.modifier(WinCountStyle())
+    }
+}
+
 struct GameView: View {
     @ObservedObject var viewModel: GameViewModel
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                tallyView
-
-                Spacer(minLength: 5)
-
-                gameBoard(geometry: geometry)
-                Spacer(minLength: 5)
-
-                gameControls
-
-                Spacer(minLength: 20)
-                
-            }.padding(.all, 10)
-        }
-        .alert(isPresented: $viewModel.showingAlert) {
-            Alert(title: Text("Game Over"), message: Text("\(viewModel.gameSettings.playerNames[viewModel.winner!]!) wins!"), dismissButton: .default(Text("OK")))
+        
+        ZStack {
+            GeometryReader { geometry in
+                VStack {
+                    tallyView
+                    
+                    Spacer(minLength: 5)
+                    
+                    gameBoard(geometry: geometry)
+                    Spacer(minLength: 5)
+                    
+                    gameControls
+                    
+                    Spacer(minLength: 20)
+                    
+                }.padding(.all, 10)
+            }
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text("Game Over"), message: Text("\(viewModel.gameSettings.playerNames[viewModel.winner!]!) wins!"), dismissButton: .default(Text("OK")))
+            }
         }
     }
 
     private var tallyView: some View {
         HStack {
             Text("\(viewModel.gameSettings.playerNames[1] ?? "Player 1") Wins: \(viewModel.wins[1] ?? 0)").bold()
+                .winCountStyle()
             Spacer()
             Text("\(viewModel.gameSettings.playerNames[2] ?? "Player 2") Wins: \(viewModel.wins[2] ?? 0)").bold()
+                .winCountStyle()
         }
     }
 
     private var gameControls: some View {
         VStack(spacing: 10) {
-            
             HStack(spacing: 30) {
                 Button("Previous Move") {
                     viewModel.undoMove()
                 }
                 .buttonStyle(GameButtonStyle())
-                
-                
                 
                 Button("Reset Wins") {
                     viewModel.resetWins()
@@ -69,10 +95,7 @@ struct GameView: View {
         let totalWidth = geometry.size.width * 0.9
         let cellSize = min(totalWidth / CGFloat(viewModel.gameSettings.columns), totalHeight / CGFloat(viewModel.gameSettings.rows) )
         
-
         return ZStack {
-           
-
             VStack(spacing: 0) {
                 ForEach(0..<viewModel.board.count, id: \.self) { row in
                     HStack(spacing: 0) {
@@ -88,14 +111,12 @@ struct GameView: View {
                     }
                 }
             }
-          
             .background(viewModel.gameSettings.boardColor)
             .cornerRadius(15)
             .shadow(radius: 5)
         }
-        .frame(width: totalWidth , height: totalHeight  )
+        .frame(width: totalWidth, height: totalHeight)
     }
-
 
     private var adBanner: some View {
         Rectangle()
@@ -114,7 +135,7 @@ struct GameButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .padding()
-            .frame(maxWidth: .infinity)  
+            .frame(maxWidth: .infinity)
             .background(
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
@@ -127,4 +148,7 @@ struct GameButtonStyle: ButtonStyle {
             .shadow(radius: configuration.isPressed ? 2 : 5)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
+}
+extension Color {
+    static let lightBlue = Color(red: 245/255, green: 245/255, blue:  245/255)  
 }
