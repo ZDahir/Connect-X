@@ -13,13 +13,11 @@ class GameSettings: ObservableObject {
     @Published var winLength: Int = 4
     @Published var winDirections: [Direction] = [.vertical, .horizontal, .diagonalUp, .diagonalDown]
     @Published var playerNames: [Int: String] = [1: "Player 1", 2: "Player 2"]
-    
     @Published var isPlayerVsComputer: Bool = false {
         didSet {
             playerNames[2] = isPlayerVsComputer ? "Bot" : "Player 2"
         }
     }
-    
     @Published var player1Color: Color = .red
     @Published var player2Color: Color = .yellow
     @Published var boardColor: Color = .blue
@@ -33,4 +31,3 @@ class GameSettings: ObservableObject {
         var id: String { self.rawValue }
     }
 }
-

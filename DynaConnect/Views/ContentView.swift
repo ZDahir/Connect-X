@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var gameSettings = GameSettings()
-    @StateObject var viewModel: GameViewModel  
+    @StateObject var viewModel: GameViewModel
 
     init() {
         let settings = GameSettings()

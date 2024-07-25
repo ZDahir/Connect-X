@@ -9,16 +9,14 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var gameSettings: GameSettings
-    @State private var isShowingMailView = false
     @State private var isShareSheetPresented = false
     @Environment(\.colorScheme) var colorScheme
-    
-    
+
     var body: some View {
         ZStack {
             (colorScheme == .dark ? Color.black : Color.lightBlue)
-                            .edgesIgnoringSafeArea(.all)
-            
+                .edgesIgnoringSafeArea(.all)
+
             VStack {
                 Form {
                     Section(header: Text("Grid Settings")) {
@@ -57,12 +55,12 @@ struct SettingsView: View {
                     Section(header: Text("Game Mode")) {
                         Toggle("Player vs Computer", isOn: $gameSettings.isPlayerVsComputer)
                     }
-                    
+
                     Section(header: Text("Piece Colors")) {
                         ColorPicker("Player 1 Color", selection: $gameSettings.player1Color)
                         ColorPicker("Player 2 Color", selection: $gameSettings.player2Color)
                     }
-                    
+
                     Section(header: Text("Board Color")) {
                         ColorPicker("Board Color", selection: $gameSettings.boardColor)
                     }
@@ -76,24 +74,22 @@ struct SettingsView: View {
                         }
                     }
                 }
-                .background(Color.clear) // Make the form background clear
-                .scrollContentBackground(.hidden) // Ensure the
-                
-                .scrollContentBackground(.hidden) // Make sure the form doesn't have its own background color
+                .background(Color.clear)
+                .scrollContentBackground(.hidden)
                 .navigationBarTitle("Settings", displayMode: .inline)
-                .sheet(isPresented: $isShareSheetPresented, content: {
+                .sheet(isPresented: $isShareSheetPresented) {
                     ActivityViewController(activityItems: ["Check out this awesome app!"])
-                })
+                }
             }
         }
     }
-    
+
     func leaveARating() {
         if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
             UIApplication.shared.open(url)
         }
     }
-    
+
     func shareApp() {
         isShareSheetPresented = true
     }
@@ -104,9 +100,8 @@ struct ActivityViewController: UIViewControllerRepresentable {
     let applicationActivities: [UIActivity]? = nil
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
-        return UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
     }
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }
-

@@ -35,21 +35,15 @@ struct GameView: View {
     @ObservedObject var viewModel: GameViewModel
 
     var body: some View {
-        
         ZStack {
             GeometryReader { geometry in
                 VStack {
                     tallyView
-                    
                     Spacer(minLength: 5)
-                    
                     gameBoard(geometry: geometry)
                     Spacer(minLength: 5)
-                    
                     gameControls
-                    
                     Spacer(minLength: 20)
-                    
                 }.padding(.all, 10)
             }
             .alert(isPresented: $viewModel.showingAlert) {
@@ -93,7 +87,7 @@ struct GameView: View {
     private func gameBoard(geometry: GeometryProxy) -> some View {
         let totalHeight = geometry.size.height * 2 / 3
         let totalWidth = geometry.size.width * 0.9
-        let cellSize = min(totalWidth / CGFloat(viewModel.gameSettings.columns), totalHeight / CGFloat(viewModel.gameSettings.rows) )
+        let cellSize = min(totalWidth / CGFloat(viewModel.gameSettings.columns), totalHeight / CGFloat(viewModel.gameSettings.rows))
         
         return ZStack {
             VStack(spacing: 0) {
@@ -149,6 +143,7 @@ struct GameButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
 }
+
 extension Color {
-    static let lightBlue = Color(red: 245/255, green: 245/255, blue:  245/255)  
+    static let lightBlue = Color(red: 245/255, green: 245/255, blue: 245/255)
 }

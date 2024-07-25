@@ -48,7 +48,7 @@ class GameViewModel: ObservableObject {
                 if self.checkForWin(row: destination.0, column: destination.1) {
                     self.winner = self.currentPlayer
                     self.showingAlert = true
-                    self.wins[self.currentPlayer, default: 0] += 1  // Update wins here
+                    self.wins[self.currentPlayer, default: 0] += 1
                 } else {
                     self.currentPlayer = self.currentPlayer == 1 ? 2 : 1
                     if self.gameSettings.isPlayerVsComputer && self.currentPlayer == 2 {
@@ -134,9 +134,6 @@ class GameViewModel: ObservableObject {
     func resetGame() {
         board = Array(repeating: Array(repeating: 0, count: gameSettings.columns), count: gameSettings.rows)
         currentPlayer = 1
-        if let win = winner {
-            wins[win, default: 0] += 1
-        }
         winner = nil
         showingAlert = false
         moveHistory = []
@@ -153,8 +150,6 @@ class GameViewModel: ObservableObject {
         currentPlayer = currentPlayer == 1 ? 2 : 1
         winner = nil
     }
-
-
 
     func newGame() {
         board = Array(repeating: Array(repeating: 0, count: gameSettings.columns), count: gameSettings.rows)
