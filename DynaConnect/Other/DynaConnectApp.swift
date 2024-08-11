@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct DynaConnectApp: App {
+    @AppStorage("isOnboardingComplete") private var isOnboardingComplete = false
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +26,11 @@ struct DynaConnectApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isOnboardingComplete {
+                ContentView()
+            } else {
+                OnboardingView(isOnboardingComplete: $isOnboardingComplete)
+           }
         }
         .modelContainer(sharedModelContainer)
     }

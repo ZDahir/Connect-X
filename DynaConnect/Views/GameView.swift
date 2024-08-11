@@ -33,6 +33,7 @@ extension View {
 
 struct GameView: View {
     @ObservedObject var viewModel: GameViewModel
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
@@ -47,9 +48,15 @@ struct GameView: View {
                 }.padding(.all, 10)
             }
             .alert(isPresented: $viewModel.showingAlert) {
-                Alert(title: Text("Game Over"), message: Text("\(viewModel.gameSettings.playerNames[viewModel.winner!]!) wins!"), dismissButton: .default(Text("OK")))
+                Alert(
+                    title: Text("Game Over"),
+                    message: Text("\(viewModel.gameSettings.playerNames[viewModel.winner!]!) wins!"),
+                    dismissButton: .default(Text("OK"))
+                )
             }
         }
+        .background(colorScheme == .dark ? Color(white: 0.05) : Color.comfortWhite) // Adjusted background color for dark mode
+      
     }
 
     private var tallyView: some View {
@@ -145,5 +152,5 @@ struct GameButtonStyle: ButtonStyle {
 }
 
 extension Color {
-    static let lightBlue = Color(red: 245/255, green: 245/255, blue: 245/255)
+    static let comfortWhite = Color(red: 245/255, green: 245/255, blue: 245/255)
 }

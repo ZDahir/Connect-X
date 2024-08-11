@@ -16,6 +16,7 @@
 		189034F52BD6DAFE000934D3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034F42BD6DAFE000934D3 /* GameView.swift */; };
 		189034F72BD6DB2C000934D3 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034F62BD6DB2C000934D3 /* GameSettings.swift */; };
 		189034F92BD6E8AA000934D3 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034F82BD6E8AA000934D3 /* GameViewModel.swift */; };
+		18B750AA2C663E0100E22DC1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B750A92C663E0100E22DC1 /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		189034F42BD6DAFE000934D3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		189034F62BD6DB2C000934D3 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		189034F82BD6E8AA000934D3 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		18B750A92C663E0100E22DC1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				189034F42BD6DAFE000934D3 /* GameView.swift */,
 				189034F22BD6DAE3000934D3 /* SettingsView.swift */,
 				189034E32BD6DA2F000934D3 /* ContentView.swift */,
+				18B750A92C663E0100E22DC1 /* OnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				189034F72BD6DB2C000934D3 /* GameSettings.swift in Sources */,
 				189034E62BD6DA2F000934D3 /* Item.swift in Sources */,
 				189034E22BD6DA2F000934D3 /* DynaConnectApp.swift in Sources */,
+				18B750AA2C663E0100E22DC1 /* OnboardingView.swift in Sources */,
 				189034F52BD6DAFE000934D3 /* GameView.swift in Sources */,
 				189034F92BD6E8AA000934D3 /* GameViewModel.swift in Sources */,
 			);

@@ -14,8 +14,8 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            (colorScheme == .dark ? Color.black : Color.lightBlue)
-                .edgesIgnoringSafeArea(.all)
+            (colorScheme == .dark ? Color(white: 0.05) : Color.comfortWhite) 
+                            .edgesIgnoringSafeArea(.all)
 
             VStack {
                 Form {
