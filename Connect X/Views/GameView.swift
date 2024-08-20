@@ -95,19 +95,38 @@ struct GameView: View {
         let totalHeight = geometry.size.height * 2 / 3
         let totalWidth = geometry.size.width * 0.9
         let cellSize = min(totalWidth / CGFloat(viewModel.gameSettings.columns), totalHeight / CGFloat(viewModel.gameSettings.rows))
-        
+
         return ZStack {
             VStack(spacing: 0) {
                 ForEach(0..<viewModel.board.count, id: \.self) { row in
                     HStack(spacing: 0) {
                         ForEach(0..<viewModel.board[row].count, id: \.self) { column in
-                            Circle()
-                                .padding(.all, 5)
-                                .foregroundColor(getColor(for: row, column: column))
-                                .frame(width: cellSize, height: cellSize)
-                                .onTapGesture {
-                                    viewModel.dropPiece(in: column)
+                            ZStack {
+                                Circle()
+                                    .padding(.all, 5)
+                                    .foregroundColor(getColor(for: row, column: column))
+                                    .frame(width: cellSize, height: cellSize)
+                                    .onTapGesture {
+                                        viewModel.dropPiece(in: column)
+                                    }
+                                
+                                // Check if the current position is a winning position
+                                if viewModel.winningPositions.contains(where: { $0 == (row, column) }) {
+                                    // Ensure that there are winning positions
+                                    if !viewModel.winningPositions.isEmpty {
+                                        // Get the middle position of the winning positions
+                                        let middleIndex = viewModel.winningPositions.count / 2
+                                        let middlePosition = viewModel.winningPositions[middleIndex]
+
+                                        // If this is the middle position, overlay a star
+                                        if middlePosition == (row, column) {
+                                            Text("★")
+                                                .font(.largeTitle)
+                                                .foregroundColor(.yellow)
+                                        }
+                                    }
                                 }
+                            }
                         }
                     }
                 }
@@ -118,6 +137,8 @@ struct GameView: View {
         }
         .frame(width: totalWidth, height: totalHeight)
     }
+
+
 
     private var adBanner: some View {
         Rectangle()

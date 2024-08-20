@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
+        
     @StateObject var gameSettings = GameSettings()
     @StateObject var viewModel: GameViewModel
+    
+    @State var selectedIndex = 1
 
     init() {
         let settings = GameSettings()
@@ -19,15 +22,17 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedIndex) {
             GameView(viewModel: viewModel)
                 .tabItem {
                     Label("Game", systemImage: "gamecontroller")
                 }
+                .tag(0)
             SettingsView(gameSettings: gameSettings)
                 .tabItem {
                     Label("Settings", systemImage: "slider.horizontal.3")
                 }
+                .tag(1)
         }
     }
 }

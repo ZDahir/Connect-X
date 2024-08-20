@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		189034E22BD6DA2F000934D3 /* DynaConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E12BD6DA2F000934D3 /* DynaConnectApp.swift */; };
+		189034E22BD6DA2F000934D3 /* ConnectX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E12BD6DA2F000934D3 /* ConnectX.swift */; };
 		189034E42BD6DA2F000934D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E32BD6DA2F000934D3 /* ContentView.swift */; };
 		189034E62BD6DA2F000934D3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E52BD6DA2F000934D3 /* Item.swift */; };
 		189034E82BD6DA30000934D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 189034E72BD6DA30000934D3 /* Assets.xcassets */; };
@@ -21,7 +21,7 @@
 
 /* Begin PBXFileReference section */
 		189034DE2BD6DA2F000934D3 /* Connect X.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connect X.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		189034E12BD6DA2F000934D3 /* DynaConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynaConnectApp.swift; sourceTree = "<group>"; };
+		189034E12BD6DA2F000934D3 /* ConnectX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectX.swift; sourceTree = "<group>"; };
 		189034E32BD6DA2F000934D3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		189034E52BD6DA2F000934D3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		189034E72BD6DA30000934D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		189034FD2BD863CF000934D3 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				189034E12BD6DA2F000934D3 /* DynaConnectApp.swift */,
+				189034E12BD6DA2F000934D3 /* ConnectX.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -191,7 +191,7 @@
 				189034F32BD6DAE3000934D3 /* SettingsView.swift in Sources */,
 				189034F72BD6DB2C000934D3 /* GameSettings.swift in Sources */,
 				189034E62BD6DA2F000934D3 /* Item.swift in Sources */,
-				189034E22BD6DA2F000934D3 /* DynaConnectApp.swift in Sources */,
+				189034E22BD6DA2F000934D3 /* ConnectX.swift in Sources */,
 				18B750AA2C663E0100E22DC1 /* OnboardingView.swift in Sources */,
 				189034F52BD6DAFE000934D3 /* GameView.swift in Sources */,
 				189034F92BD6E8AA000934D3 /* GameViewModel.swift in Sources */,

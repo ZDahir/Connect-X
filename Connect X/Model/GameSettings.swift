@@ -8,9 +8,9 @@
 import SwiftUI
 
 class GameSettings: ObservableObject {
-    @Published var rows: Int = 6
-    @Published var columns: Int = 7
-    @Published var winLength: Int = 4
+    @Published var rows = 6
+    @Published var columns = 7
+    @Published var winLength = 4
     @Published var winDirections: [Direction] = [.vertical, .horizontal, .diagonalUp, .diagonalDown]
     @Published var playerNames: [Int: String] = [1: "Player 1", 2: "Player 2"]
     @Published var isPlayerVsComputer: Bool = false {

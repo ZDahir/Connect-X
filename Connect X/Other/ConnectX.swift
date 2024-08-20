@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct DynaConnectApp: App {
+struct ConnectX: App {
     @AppStorage("isOnboardingComplete") private var isOnboardingComplete = false
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([

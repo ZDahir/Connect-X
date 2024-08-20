@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var isOnboardingComplete: Bool
     @State private var gridColor = Color.blue
     @State private var pieceColors: [[Color]] = []
@@ -46,6 +49,23 @@ struct OnboardingView: View {
             initializePieceColors()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isLoading = false
+            }
+            
+            if colorScheme == .light {
+                UIPageControl.appearance().currentPageIndicatorTintColor = .black
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
+            } else {
+                UIPageControl.appearance().currentPageIndicatorTintColor = .white
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.2)
+            }
+        }
+        .onChange(of: colorScheme) { value1, value2 in
+            if colorScheme == .light {
+                UIPageControl.appearance().currentPageIndicatorTintColor = .black
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
+            } else {
+                UIPageControl.appearance().currentPageIndicatorTintColor = .white
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.2)
             }
         }
     }
@@ -163,7 +183,7 @@ struct OnboardingView: View {
                 .padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
-                .cornerRadius(8)
+                .cornerRadius(30)
         }
         .padding()
     }
@@ -177,7 +197,7 @@ struct OnboardingView: View {
                 .padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
-                .cornerRadius(8)
+                .cornerRadius(30)
         }
         .padding()
     }
@@ -219,7 +239,7 @@ struct OnboardingView: View {
                     }
                 }
             }
-            .background(Color.black.opacity(0.1))
+            .background(colorScheme == .dark ? Color.white.opacity(0.1) : Color.black.opacity(0.1))
             .cornerRadius(15)
             .shadow(radius: 5)
         }
@@ -268,16 +288,16 @@ struct OnboardingView: View {
     }
 
     private func startGridColorAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-            withAnimation(.easeInOut(duration: 1.5)) {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            withAnimation(.easeInOut(duration: 1.0)) {
                 gridColor = colors.randomElement() ?? Color.blue
             }
         }
     }
 
     private func startPieceColorAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-            withAnimation(.easeInOut(duration: 1.5)) {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            withAnimation(.easeInOut(duration: 1.0)) {
                 let newColors = pieceColorSets.randomElement() ?? pieceColorSets[0]
                 for row in 0..<pieceColors.count {
                     for column in 0..<pieceColors[row].count {
@@ -289,8 +309,8 @@ struct OnboardingView: View {
     }
 
     private func startGridSizeAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-            withAnimation(.easeInOut(duration: 1.5)) {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            withAnimation(.easeInOut(duration: 1.0)) {
                 currentGridSizeIndex = (currentGridSizeIndex + 1) % gridSizes.count
             }
         }
