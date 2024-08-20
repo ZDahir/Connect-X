@@ -20,12 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		189034DE2BD6DA2F000934D3 /* DynaConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynaConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		189034DE2BD6DA2F000934D3 /* Connect X.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connect X.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189034E12BD6DA2F000934D3 /* DynaConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynaConnectApp.swift; sourceTree = "<group>"; };
 		189034E32BD6DA2F000934D3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		189034E52BD6DA2F000934D3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		189034E72BD6DA30000934D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		189034E92BD6DA30000934D3 /* DynaConnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DynaConnect.entitlements; sourceTree = "<group>"; };
 		189034EB2BD6DA30000934D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		189034F22BD6DAE3000934D3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		189034F42BD6DAFE000934D3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -48,7 +47,7 @@
 		189034D52BD6DA2F000934D3 = {
 			isa = PBXGroup;
 			children = (
-				189034E02BD6DA2F000934D3 /* DynaConnect */,
+				189034E02BD6DA2F000934D3 /* Connect X */,
 				189034DF2BD6DA2F000934D3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +55,12 @@
 		189034DF2BD6DA2F000934D3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				189034DE2BD6DA2F000934D3 /* DynaConnect.app */,
+				189034DE2BD6DA2F000934D3 /* Connect X.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		189034E02BD6DA2F000934D3 /* DynaConnect */ = {
+		189034E02BD6DA2F000934D3 /* Connect X */ = {
 			isa = PBXGroup;
 			children = (
 				189034FD2BD863CF000934D3 /* Other */,
@@ -69,10 +68,9 @@
 				189034FC2BD863C1000934D3 /* ViewModels */,
 				189034FA2BD863B3000934D3 /* Model */,
 				189034E72BD6DA30000934D3 /* Assets.xcassets */,
-				189034E92BD6DA30000934D3 /* DynaConnect.entitlements */,
 				189034EA2BD6DA30000934D3 /* Preview Content */,
 			);
-			path = DynaConnect;
+			path = "Connect X";
 			sourceTree = "<group>";
 		};
 		189034EA2BD6DA30000934D3 /* Preview Content */ = {
@@ -122,9 +120,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		189034DD2BD6DA2F000934D3 /* DynaConnect */ = {
+		189034DD2BD6DA2F000934D3 /* Connect X */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 189034EF2BD6DA30000934D3 /* Build configuration list for PBXNativeTarget "DynaConnect" */;
+			buildConfigurationList = 189034EF2BD6DA30000934D3 /* Build configuration list for PBXNativeTarget "Connect X" */;
 			buildPhases = (
 				189034DA2BD6DA2F000934D3 /* Sources */,
 				189034DB2BD6DA2F000934D3 /* Frameworks */,
@@ -134,9 +132,9 @@
 			);
 			dependencies = (
 			);
-			name = DynaConnect;
+			name = "Connect X";
 			productName = DynaConnect;
-			productReference = 189034DE2BD6DA2F000934D3 /* DynaConnect.app */;
+			productReference = 189034DE2BD6DA2F000934D3 /* Connect X.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -154,7 +152,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 189034D92BD6DA2F000934D3 /* Build configuration list for PBXProject "DynaConnect" */;
+			buildConfigurationList = 189034D92BD6DA2F000934D3 /* Build configuration list for PBXProject "Connect X" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -167,7 +165,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				189034DD2BD6DA2F000934D3 /* DynaConnect */,
+				189034DD2BD6DA2F000934D3 /* Connect X */,
 			);
 		};
 /* End PBXProject section */
@@ -322,10 +320,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DynaConnect/DynaConnect.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Connect X/Connect X.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DynaConnect/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Connect X/Preview Content\"";
 				DEVELOPMENT_TEAM = YP6X3H62GH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -345,7 +343,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "zmdj15-gmail.com.DynaConnect";
+				PRODUCT_BUNDLE_IDENTIFIER = "zmdj15-gmail.com.Connect-X";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -360,10 +358,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DynaConnect/DynaConnect.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Connect X/Connect X.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DynaConnect/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Connect X/Preview Content\"";
 				DEVELOPMENT_TEAM = YP6X3H62GH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -383,7 +381,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "zmdj15-gmail.com.DynaConnect";
+				PRODUCT_BUNDLE_IDENTIFIER = "zmdj15-gmail.com.Connect-X";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -396,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		189034D92BD6DA2F000934D3 /* Build configuration list for PBXProject "DynaConnect" */ = {
+		189034D92BD6DA2F000934D3 /* Build configuration list for PBXProject "Connect X" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				189034ED2BD6DA30000934D3 /* Debug */,
@@ -405,7 +403,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		189034EF2BD6DA30000934D3 /* Build configuration list for PBXNativeTarget "DynaConnect" */ = {
+		189034EF2BD6DA30000934D3 /* Build configuration list for PBXNativeTarget "Connect X" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				189034F02BD6DA30000934D3 /* Debug */,
