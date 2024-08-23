@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct WinCountStyle: ViewModifier {
     func body(content: Content) -> some View {
@@ -13,15 +14,17 @@ struct WinCountStyle: ViewModifier {
             .padding()
             .frame(maxWidth: .infinity)
             .background(
-                ZStack {
-                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.blue, lineWidth: 2)
-                }
+//                ZStack {
+//                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
+//                    RoundedRectangle(cornerRadius: 8)
+//                        .stroke(Color.blue, lineWidth: 2)
+//                }
+                Color(hex: "2F3C7E")
             )
             .foregroundColor(.white)
-            .cornerRadius(8)
+            .cornerRadius(30)
             .shadow(radius: 5)
+        
     }
 }
 
@@ -37,6 +40,7 @@ struct GameView: View {
 
     var body: some View {
         ZStack {
+//            Color(hex: "FBEAEB")
             GeometryReader { geometry in
                 VStack {
                     tallyView
@@ -45,26 +49,36 @@ struct GameView: View {
                     Spacer(minLength: 5)
                     gameControls
                     Spacer(minLength: 20)
-                }.padding(.all, 10)
+                }
+                .padding(.all, 10)
             }
-            .alert(isPresented: $viewModel.showingAlert) {
-                Alert(
-                    title: Text("Game Over"),
-                    message: Text("\(viewModel.gameSettings.playerNames[viewModel.winner!]!) wins!"),
-                    dismissButton: .default(Text("OK"))
-                )
+            .toast(isPresenting: $viewModel.showingAlert) {
+                
+                // `.alert` is the default displayMode
+                AlertToast(type: .regular, title: "\(viewModel.gameSettings.playerNames[viewModel.winner ?? 0] ?? "") wins!")
+                
+                //Choose .hud to toast alert from the top of the screen
+                //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
+                
+                //Choose .banner to slide/pop alert from the bottom of the screen
+                //AlertToast(displayMode: .banner(.slide), type: .regular, title: "Message Sent!")
+                
             }
         }
-        .background(colorScheme == .dark ? Color(white: 0.05) : Color.comfortWhite) // Adjusted background color for dark mode
+        .background(colorScheme == .dark ? Color(white: 0.05) : Color.comfortWhite)
+        // Adjusted background color for dark mode
+
       
     }
 
     private var tallyView: some View {
         HStack {
-            Text("\(viewModel.gameSettings.playerNames[1] ?? "Player 1") Wins: \(viewModel.wins[1] ?? 0)").bold()
+            Text("\(viewModel.wins[1] ?? 0 > viewModel.wins[2] ?? 0 ? "👑" : "") \(viewModel.gameSettings.playerNames[1] ?? "Player 1") Wins: \(viewModel.wins[1] ?? 0)").bold()
+                .font(.subheadline)
                 .winCountStyle()
             Spacer()
-            Text("\(viewModel.gameSettings.playerNames[2] ?? "Player 2") Wins: \(viewModel.wins[2] ?? 0)").bold()
+            Text("\(viewModel.wins[2] ?? 0 > viewModel.wins[1] ?? 0 ? "👑" : "") \(viewModel.gameSettings.playerNames[2] ?? "Player 2") Wins: \(viewModel.wins[2] ?? 0)").bold()
+                .font(.subheadline)
                 .winCountStyle()
         }
     }
@@ -72,13 +86,29 @@ struct GameView: View {
     private var gameControls: some View {
         VStack(spacing: 10) {
             HStack(spacing: 30) {
-                Button("Previous Move") {
+                Button {
                     viewModel.undoMove()
+                } label: {
+                    HStack {
+                        Image(.undoIcon)
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                        Text("Previous Move")
+                    }
                 }
                 .buttonStyle(GameButtonStyle())
                 
-                Button("Reset Wins") {
+                Button {
                     viewModel.resetWins()
+                } label: {
+                    HStack {
+                        Image(.resetIcon)
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                        Text("Reset Wins")
+                    }
                 }
                 .buttonStyle(GameButtonStyle())
             }
@@ -115,14 +145,17 @@ struct GameView: View {
                                     // Ensure that there are winning positions
                                     if !viewModel.winningPositions.isEmpty {
                                         // Get the middle position of the winning positions
-                                        let middleIndex = viewModel.winningPositions.count / 2
-                                        let middlePosition = viewModel.winningPositions[middleIndex]
-
-                                        // If this is the middle position, overlay a star
-                                        if middlePosition == (row, column) {
-                                            Text("★")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.yellow)
+//                                        let print = print(viewModel.winningPositions)
+//                                        let middleIndex = viewModel.winningPositions.count / 2
+//                                        let middlePosition = viewModel.winningPositions[middleIndex]
+                                        
+                                        ForEach(0..<Int(viewModel.gameSettings.winLength)) { index in
+                                            // If this is the middle position, overlay a star
+                                            if viewModel.winningPositions[index] == (row, column) {
+                                                Text("★")
+                                                    .font(.largeTitle)
+                                                    .foregroundColor(.orange)
+                                            }
                                         }
                                     }
                                 }
@@ -131,7 +164,7 @@ struct GameView: View {
                     }
                 }
             }
-            .background(viewModel.gameSettings.boardColor)
+            .background(/*viewModel.gameSettings.boardColor*/Color(hex: "2F3C7E"))
             .cornerRadius(15)
             .shadow(radius: 5)
         }
@@ -159,14 +192,15 @@ struct GameButtonStyle: ButtonStyle {
             .padding()
             .frame(maxWidth: .infinity)
             .background(
-                ZStack {
-                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.blue, lineWidth: 2)
-                }
+                //                ZStack {
+                //                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
+                //                    RoundedRectangle(cornerRadius: 8)
+                //                        .stroke(Color.blue, lineWidth: 2)
+                //                }
+                Color(hex: "2F3C7E")
             )
             .foregroundColor(.white)
-            .cornerRadius(8)
+            .cornerRadius(30)
             .shadow(radius: configuration.isPressed ? 2 : 5)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
@@ -174,4 +208,36 @@ struct GameButtonStyle: ButtonStyle {
 
 extension Color {
     static let comfortWhite = Color(red: 245/255, green: 245/255, blue: 245/255)
+    init?(hex: String) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+
+        var r: CGFloat = 0.0
+        var g: CGFloat = 0.0
+        var b: CGFloat = 0.0
+        var a: CGFloat = 1.0
+
+        let length = hexSanitized.count
+
+        guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else { return nil }
+
+        if length == 6 {
+            r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+            g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+            b = CGFloat(rgb & 0x0000FF) / 255.0
+
+        } else if length == 8 {
+            r = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
+            g = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
+            b = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
+            a = CGFloat(rgb & 0x000000FF) / 255.0
+
+        } else {
+            return nil
+        }
+
+        self.init(red: r, green: g, blue: b, opacity: a)
+    }
 }

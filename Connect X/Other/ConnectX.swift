@@ -7,10 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import AlertToast
 
 @main
 struct ConnectX: App {
     @AppStorage("isOnboardingComplete") private var isOnboardingComplete = false
+    @State var showAlert = false
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -26,12 +28,24 @@ struct ConnectX: App {
 
     var body: some Scene {
         WindowGroup {
-            if isOnboardingComplete {
-                ContentView()
-            } else {
-                OnboardingView(isOnboardingComplete: $isOnboardingComplete)
-           }
+            VStack {
+                if isOnboardingComplete {
+                    ContentView()
+                } else {
+                    OnboardingView(isOnboardingComplete: $isOnboardingComplete)
+                }
+            }
+            .toast(isPresenting: $showAlert) {
+                AlertToast(displayMode: .alert, type: .complete(.green), title: "Get Set Connect...")
+            }
+            .onChange(of: isOnboardingComplete){ value1, value2 in
+                if isOnboardingComplete {
+                    showAlert = true
+                }
+            }
         }
         .modelContainer(sharedModelContainer)
+        
     }
 }
+ 

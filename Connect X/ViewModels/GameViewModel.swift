@@ -114,6 +114,7 @@ class GameViewModel: ObservableObject {
 
             if count >= neededToWin {
                 winningPositions = calculateWinningPositions(startRow: row, startColumn: column, direction: offsets, steps: neededToWin)
+                
                 return true
             }
         }

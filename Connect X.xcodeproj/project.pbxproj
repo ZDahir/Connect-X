@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185C35412C784D9100D1EC6A /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 185C35402C784D9100D1EC6A /* AlertToast */; };
 		189034E22BD6DA2F000934D3 /* ConnectX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E12BD6DA2F000934D3 /* ConnectX.swift */; };
 		189034E42BD6DA2F000934D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E32BD6DA2F000934D3 /* ContentView.swift */; };
 		189034E62BD6DA2F000934D3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189034E52BD6DA2F000934D3 /* Item.swift */; };
@@ -38,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185C35412C784D9100D1EC6A /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +135,9 @@
 			dependencies = (
 			);
 			name = "Connect X";
+			packageProductDependencies = (
+				185C35402C784D9100D1EC6A /* AlertToast */,
+			);
 			productName = DynaConnect;
 			productReference = 189034DE2BD6DA2F000934D3 /* Connect X.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +166,9 @@
 				Base,
 			);
 			mainGroup = 189034D52BD6DA2F000934D3;
+			packageReferences = (
+				185C353F2C784D9100D1EC6A /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = 189034DF2BD6DA2F000934D3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -413,6 +421,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		185C353F2C784D9100D1EC6A /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		185C35402C784D9100D1EC6A /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 185C353F2C784D9100D1EC6A /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 189034D62BD6DA2F000934D3 /* Project object */;
 }

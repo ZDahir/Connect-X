@@ -22,17 +22,23 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedIndex) {
+        NavigationView {
             GameView(viewModel: viewModel)
-                .tabItem {
-                    Label("Game", systemImage: "gamecontroller")
-                }
-                .tag(0)
-            SettingsView(gameSettings: gameSettings)
-                .tabItem {
-                    Label("Settings", systemImage: "slider.horizontal.3")
-                }
-                .tag(1)
+                .toolbar(content: {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            SettingsView(gameSettings: gameSettings)
+                                .navigationBarBackButtonHidden()
+                        } label: {
+                            Image(.settingsIcon)
+                                .renderingMode(.template)
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Color.green)
+                            
+                        }
+                    }
+                })
         }
     }
 }

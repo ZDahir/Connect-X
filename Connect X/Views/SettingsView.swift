@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) var pop
     @ObservedObject var gameSettings: GameSettings
     @State private var isShareSheetPresented = false
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
@@ -168,6 +170,16 @@ struct SettingsView: View {
                 }
             }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    pop()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.green)
+                }
+            }
+        })
     }
     
     func getDirectionImage(direction: GameSettings.Direction) -> Image {

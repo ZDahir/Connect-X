@@ -43,6 +43,7 @@ struct OnboardingView: View {
                     startPieceColorAnimation()
                     startGridSizeAnimation()
                 }
+                .animation(.linear, value: currentTab)
             }
         }
         .onAppear {
@@ -89,17 +90,19 @@ struct OnboardingView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding()
+                .foregroundColor(Color(hex: "2F3C7E"))
             
             Text("Play on grids from 4x4 to 8x9, choose the number of pieces needed to win, and set horizontal, vertical, or diagonal win directions. The rules are in your hands!")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-                .font(.body)
+                .font(.subheadline)
                 .padding()
             
-            
+            Spacer()
 
             continueButton
         }
+        .padding(.vertical, 50)
         .tabItem {
             Image(systemName: "1.circle")
             Text("Welcome")
@@ -111,17 +114,21 @@ struct OnboardingView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
+                .foregroundColor(gridColor)
+            
 
             Text("Watch the grid come to life with changing colors.")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-                .font(.body)
+                .font(.subheadline)
 
             animatedConnectFourGrid
                 .padding()
 
+            Spacer()
             continueButton
         }
+        .padding(.vertical, 50)
         .tabItem {
             Image(systemName: "2.circle")
             Text("Grid Colors")
@@ -134,17 +141,21 @@ struct OnboardingView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
+                .foregroundColor(pieceColors[0][0])
 
             Text("Enjoy the vibrant pieces during the game.")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-                .font(.body)
+                .font(.subheadline)
 
             animatedConnectFourPieces
                 .padding()
+            
+            Spacer()
 
             continueButton
         }
+        .padding(.vertical, 50)
         .tabItem {
             Image(systemName: "3.circle")
             Text("Piece Colors")
@@ -157,17 +168,22 @@ struct OnboardingView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
+                .foregroundColor(Color(hex: "2F3C7E"))
+//                .scaleEffect()
 
             Text("Adjust the grid size to suit your play style.")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-                .font(.body)
+                .font(.subheadline)
 
             animatedConnectFourGridWithSize
                 .padding()
 
+            Spacer()
+            
             playNowButton
         }
+        .padding(.vertical, 50)
         .tabItem {
             Image(systemName: "4.circle")
             Text("Grid Sizes")
@@ -180,8 +196,9 @@ struct OnboardingView: View {
         }) {
             Text("Continue")
                 .font(.headline)
+                .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.blue)
+                .background(Color.green)
                 .foregroundColor(.white)
                 .cornerRadius(30)
         }
@@ -190,12 +207,15 @@ struct OnboardingView: View {
 
     private var playNowButton: some View {
         Button(action: {
-            isOnboardingComplete = true
+            withAnimation(.easeInOut) {
+                isOnboardingComplete = true
+            }
         }) {
-            Text("Play Now")
+            Text("Play Now 🚀")
                 .font(.headline)
+                .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.blue)
+                .background(Color.green)
                 .foregroundColor(.white)
                 .cornerRadius(30)
         }
@@ -262,7 +282,7 @@ struct OnboardingView: View {
                     }
                 }
             }
-            .background(Color.blue)
+            .background(Color(hex: "2F3C7E"))
             .cornerRadius(15)
             .shadow(radius: 5)
         }
