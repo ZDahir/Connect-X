@@ -54,7 +54,7 @@ struct GameView: View {
             }
             .toast(isPresenting: $viewModel.showingAlert) {
                 
-                // `.alert` is the default displayMode
+                // .alert is the default displayMode
                 AlertToast(type: .regular, title: "\(viewModel.gameSettings.playerNames[viewModel.winner ?? 0] ?? "") wins!")
                 
                 //Choose .hud to toast alert from the top of the screen
@@ -142,34 +142,23 @@ struct GameView: View {
                                 
                                 // Check if the current position is a winning position
                                 if viewModel.winningPositions.contains(where: { $0 == (row, column) }) {
-                                    // Ensure that there are winning positions
-                                    if !viewModel.winningPositions.isEmpty {
-                                        // Get the middle position of the winning positions
-//                                        let print = print(viewModel.winningPositions)
-//                                        let middleIndex = viewModel.winningPositions.count / 2
-//                                        let middlePosition = viewModel.winningPositions[middleIndex]
-                                        
-                                        ForEach(0..<Int(viewModel.gameSettings.winLength)) { index in
-                                            // If this is the middle position, overlay a star
-                                            if viewModel.winningPositions[index] == (row, column) {
-                                                Text("★")
-                                                    .font(.largeTitle)
-                                                    .foregroundColor(.orange)
-                                            }
-                                        }
-                                    }
+                                    Text("★")
+                                        .font(.largeTitle)
+                                        .foregroundColor(.orange)
                                 }
                             }
                         }
                     }
                 }
             }
-            .background(/*viewModel.gameSettings.boardColor*/Color(hex: "2F3C7E"))
+            .background(Color(hex: "2F3C7E"))
             .cornerRadius(15)
             .shadow(radius: 5)
         }
         .frame(width: totalWidth, height: totalHeight)
     }
+
+
 
 
 

@@ -100,21 +100,34 @@ class GameViewModel: ObservableObject {
         for direction in gameSettings.winDirections {
             let offsets = directionOffsets(for: direction)
             var count = 1
+            
 
-            for step in [-1, 1] {
-                for i in 1..<neededToWin {
-                    let x = column + i * offsets.dx * step
-                    let y = row + i * offsets.dy * step
-                    if x < 0 || x >= gameSettings.columns || y < 0 || y >= gameSettings.rows || board[y][x] != player {
-                        break
-                    }
-                    count += 1
+            var tempPositions: [(Int, Int)] = [(row, column)]
+
+           
+            for i in 1..<neededToWin {
+                let x = column + i * offsets.dx
+                let y = row + i * offsets.dy
+                if x < 0 || x >= gameSettings.columns || y < 0 || y >= gameSettings.rows || board[y][x] != player {
+                    break
                 }
+                count += 1
+                tempPositions.append((y, x))
+            }
+
+            // Check in the negative direction
+            for i in 1..<neededToWin {
+                let x = column - i * offsets.dx
+                let y = row - i * offsets.dy
+                if x < 0 || x >= gameSettings.columns || y < 0 || y >= gameSettings.rows || board[y][x] != player {
+                    break
+                }
+                count += 1
+                tempPositions.append((y, x))
             }
 
             if count >= neededToWin {
-                winningPositions = calculateWinningPositions(startRow: row, startColumn: column, direction: offsets, steps: neededToWin)
-                
+                winningPositions = tempPositions
                 return true
             }
         }
@@ -122,15 +135,29 @@ class GameViewModel: ObservableObject {
         return false
     }
 
+
     private func calculateWinningPositions(startRow: Int, startColumn: Int, direction: (dx: Int, dy: Int), steps: Int) -> [(Int, Int)] {
         var positions: [(Int, Int)] = []
+        
+        // Check in the positive direction
         for i in 0..<steps {
             let x = startColumn + i * direction.dx
             let y = startRow + i * direction.dy
             positions.append((y, x))
         }
-        return positions
+
+        // Check in the negative direction
+        for i in 1..<steps {  // Start from 1 to avoid duplicating the starting position
+            let x = startColumn - i * direction.dx
+            let y = startRow - i * direction.dy
+            positions.append((y, x))
+        }
+
+        return positions.sorted {
+            $0.0 < $1.0 || ($0.0 == $1.0 && $0.1 < $1.1)
+        }
     }
+
 
     func resetGame() {
         board = Array(repeating: Array(repeating: 0, count: gameSettings.columns), count: gameSettings.rows)
@@ -149,6 +176,10 @@ class GameViewModel: ObservableObject {
         let (position, _) = lastMove
         board[position.0][position.1] = 0
         currentPlayer = currentPlayer == 1 ? 2 : 1
+        winningPositions.removeAll()
+        if (wins[winner ?? 1] != 0) && winner != nil {
+            wins[winner ?? 1] = (wins[winner ?? 1] ?? 1) - 1
+        }
         winner = nil
     }
 
@@ -161,3 +192,4 @@ class GameViewModel: ObservableObject {
         showingAlert = false
     }
 }
+

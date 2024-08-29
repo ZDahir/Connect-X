@@ -135,22 +135,35 @@ struct SettingsView: View {
                             .fontWeight(.semibold)
                     }
                     
-                    Section(header: Text("Board Color")) {
-                        ColorPicker("Board Color", selection: $gameSettings.boardColor)
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                    }
+//                    Section(header: Text("Board Color")) {
+//                        ColorPicker("Board Color", selection: $gameSettings.boardColor)
+//                            .font(.title3)
+//                            .fontWeight(.semibold)
+//                    }
                     
                     Section(header: Text("More Options").font(.headline)) {
-                        Button(action: leaveARating) {
+
+                        
+                        Button(action: openLinktoSource) {
                             HStack {
-                                Text("Leave a rating")
+                                Text("Open Source Code")
                                 Spacer()
                                 Image(systemName: "chevron.right")
                             }
                         }
                         .font(.title3)
                         .fontWeight(.semibold)
+                        
+                        Button(action: privacyPolicy) {
+                            HStack {
+                                Text("Privacy Policy")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                            }
+                        }
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        
                         Button(action: shareApp) {
                             HStack {
                                 Text("Share the app")
@@ -166,7 +179,7 @@ struct SettingsView: View {
                 .scrollContentBackground(.hidden)
                 .navigationBarTitle("Settings", displayMode: .inline)
                 .sheet(isPresented: $isShareSheetPresented) {
-                    ActivityViewController(activityItems: ["Check out this awesome app!"])
+                    ActivityViewController(activityItems: ["Check out this awesome app called Connect X!"])
                 }
             }
         }
@@ -195,11 +208,18 @@ struct SettingsView: View {
         }
     }
 
-    func leaveARating() {
+    func privacyPolicy() {
         if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
             UIApplication.shared.open(url)
         }
     }
+    
+    func openLinktoSource() {
+        if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
+            UIApplication.shared.open(url)
+        }
+    }
+
 
     func shareApp() {
         isShareSheetPresented = true

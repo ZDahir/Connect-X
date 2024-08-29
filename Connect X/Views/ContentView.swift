@@ -38,6 +38,12 @@ struct ContentView: View {
                             
                         }
                     }
+                    
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text("Connect X")
+                            .font(.title2)
+                            .fontWeight(.heavy)
+                    }
                 })
         }
     }

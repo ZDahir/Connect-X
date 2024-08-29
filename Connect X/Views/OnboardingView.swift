@@ -329,8 +329,8 @@ struct OnboardingView: View {
     }
 
     private func startGridSizeAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            withAnimation(.easeInOut(duration: 1.0)) {
+        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { _ in
+            withAnimation(.easeInOut(duration: 1.5)) {
                 currentGridSizeIndex = (currentGridSizeIndex + 1) % gridSizes.count
             }
         }
