@@ -20,7 +20,8 @@ class GameSettings: ObservableObject {
     }
     @Published var player1Color: Color = .red
     @Published var player2Color: Color = .yellow
-    @Published var boardColor: Color = .blue
+    @Published var boardColor: Color = (Color(hex: "2F3C7E") ?? .blue)
+    @Published var starColor: Color = .orange
 
     enum Direction: String, CaseIterable, Identifiable {
         case horizontal = "Horizontal"
@@ -31,3 +32,4 @@ class GameSettings: ObservableObject {
         var id: String { self.rawValue }
     }
 }
+

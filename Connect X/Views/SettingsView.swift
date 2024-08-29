@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var pop
     @ObservedObject var gameSettings: GameSettings
@@ -18,9 +17,16 @@ struct SettingsView: View {
         ZStack {
             (colorScheme == .dark ? Color(white: 0.05) : Color.comfortWhite)
                 .edgesIgnoringSafeArea(.all)
-            
+
             VStack {
+                Text("Click New Game to Update Settings")
+                    .font(.headline)
+                    .foregroundColor(.gray) 
+
+
                 Form {
+
+
                     Section(header: Text("Grid Settings").font(.headline)) {
                         VStack(alignment: .leading) {
                             HStack {
@@ -30,7 +36,7 @@ struct SettingsView: View {
                             }
                             .font(.title3)
                             .fontWeight(.semibold)
-                            
+
                             Slider(value: Binding(get: {
                                 Float(gameSettings.rows)
                             }, set: { value in
@@ -46,7 +52,7 @@ struct SettingsView: View {
                             }
                             .font(.title2)
                             .fontWeight(.semibold)
-                            
+
                             Slider(value: Binding(get: {
                                 Float(gameSettings.columns)
                             }, set: { value in
@@ -62,7 +68,7 @@ struct SettingsView: View {
                             }
                             .font(.title2)
                             .fontWeight(.semibold)
-                            
+
                             Slider(value: Binding(get: {
                                 Float(gameSettings.winLength)
                             }, set: { value in
@@ -71,7 +77,7 @@ struct SettingsView: View {
                             .tint(.green)
                         }
                     }
-                    
+
                     Section(header: Text("Winning Directions").font(.headline)) {
                         ForEach(GameSettings.Direction.allCases, id: \.self) { direction in
                             HStack {
@@ -92,13 +98,13 @@ struct SettingsView: View {
                             .fontWeight(.semibold)
                         }
                     }
-                    
+
                     Section(header: Text("Game Mode").font(.headline)) {
                         Toggle("Player vs Computer", isOn: $gameSettings.isPlayerVsComputer)
                             .font(.title3)
                             .fontWeight(.semibold)
                     }
-                    
+
                     Section(header: Text("Player Names").font(.headline)) {
                         HStack {
                             Text("👨‍💻")
@@ -109,7 +115,7 @@ struct SettingsView: View {
                         }
                         .font(.title3)
                         .fontWeight(.semibold)
-                        
+
                         HStack {
                             if gameSettings.isPlayerVsComputer {
                                 Text("💻")
@@ -125,25 +131,27 @@ struct SettingsView: View {
                         .font(.title3)
                         .fontWeight(.semibold)
                     }
-                    
-                    Section(header: Text("Piece Colors").font(.headline)) {
+
+                    Section(header: Text("Game Colors").font(.headline)) {
+                        ColorPicker("Board Color", selection: $gameSettings.boardColor)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        ColorPicker("Win Star Color", selection: $gameSettings.starColor)
+                            .font(.title3)
+                            .fontWeight(.semibold)
                         ColorPicker("Player 1 Color", selection: $gameSettings.player1Color)
                             .font(.title3)
                             .fontWeight(.semibold)
                         ColorPicker("Player 2 Color", selection: $gameSettings.player2Color)
                             .font(.title3)
                             .fontWeight(.semibold)
-                    }
-                    
-//                    Section(header: Text("Board Color")) {
-//                        ColorPicker("Board Color", selection: $gameSettings.boardColor)
-//                            .font(.title3)
-//                            .fontWeight(.semibold)
-//                    }
-                    
-                    Section(header: Text("More Options").font(.headline)) {
-
                         
+                        
+                    }
+
+        
+
+                    Section(header: Text("More Options").font(.headline)) {
                         Button(action: openLinktoSource) {
                             HStack {
                                 Text("Open Source Code")
@@ -153,7 +161,7 @@ struct SettingsView: View {
                         }
                         .font(.title3)
                         .fontWeight(.semibold)
-                        
+
                         Button(action: privacyPolicy) {
                             HStack {
                                 Text("Privacy Policy")
@@ -163,7 +171,7 @@ struct SettingsView: View {
                         }
                         .font(.title3)
                         .fontWeight(.semibold)
-                        
+
                         Button(action: shareApp) {
                             HStack {
                                 Text("Share the app")
@@ -194,7 +202,7 @@ struct SettingsView: View {
             }
         })
     }
-    
+
     func getDirectionImage(direction: GameSettings.Direction) -> Image {
         switch direction {
         case .horizontal:
@@ -213,13 +221,12 @@ struct SettingsView: View {
             UIApplication.shared.open(url)
         }
     }
-    
+
     func openLinktoSource() {
         if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
             UIApplication.shared.open(url)
         }
     }
-
 
     func shareApp() {
         isShareSheetPresented = true

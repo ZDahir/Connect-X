@@ -92,7 +92,7 @@ struct OnboardingView: View {
                 .padding()
                 .foregroundColor(Color(hex: "2F3C7E"))
             
-            Text("Play on grids from 4x4 to 8x9, choose the number of pieces needed to win, and set horizontal, vertical, or diagonal win directions. The rules are in your hands!")
+            Text("Play on grids from 4x4 to 10x10, choose the number of pieces needed to win, and set horizontal, vertical, or diagonal win directions. The rules are in your hands!")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .font(.subheadline)
@@ -110,14 +110,14 @@ struct OnboardingView: View {
     }
     private var gridAnimationSlide: some View {
         VStack(spacing: 20) {
-            Text("Dynamic Grid Colors")
+            Text("Dynamic Board Colors")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
                 .foregroundColor(gridColor)
             
 
-            Text("Watch the grid come to life with changing colors.")
+            Text("Watch the Board come to life with changing colors.")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .font(.subheadline)
@@ -131,7 +131,7 @@ struct OnboardingView: View {
         .padding(.vertical, 50)
         .tabItem {
             Image(systemName: "2.circle")
-            Text("Grid Colors")
+            Text("Board Colors")
         }
     }
 
@@ -230,9 +230,10 @@ struct OnboardingView: View {
                     HStack(spacing: 0) {
                         ForEach(0..<gridSizes[1].columns, id: \.self) { _ in
                             Circle()
-                                .padding(.all, 5)
+                                .padding(.all, 7)
                                 .foregroundColor(.white)
                                 .frame(width: cellSize, height: cellSize)
+                                .shadow(radius: 5)
                         }
                     }
                 }
@@ -252,14 +253,16 @@ struct OnboardingView: View {
                     HStack(spacing: 0) {
                         ForEach(0..<gridSizes[1].columns, id: \.self) { column in
                             Circle()
-                                .padding(.all, 5)
+                                .padding(.all, 7)
                                 .foregroundColor(pieceColors[row][column])
                                 .frame(width: cellSize, height: cellSize)
+                                .shadow(radius: 5)
                         }
                     }
                 }
             }
-            .background(colorScheme == .dark ? Color.white.opacity(0.1) : Color.black.opacity(0.1))
+            .background(Color(red: 47/255, green: 60/255, blue: 126/255)
+)
             .cornerRadius(15)
             .shadow(radius: 5)
         }
@@ -275,9 +278,10 @@ struct OnboardingView: View {
                     HStack(spacing: 0) {
                         ForEach(0..<currentSize.columns, id: \.self) { _ in
                             Circle()
-                                .padding(.all, 5)
+                                .padding(.all, 7)
                                 .foregroundColor(.white)
                                 .frame(width: cellSize, height: cellSize)
+                                .shadow(radius: 5)
                         }
                     }
                 }
@@ -295,9 +299,10 @@ struct OnboardingView: View {
                 HStack(spacing: 0) {
                     ForEach(0..<3, id: \.self) { column in
                         Circle()
-                            .padding(5)
+                            .padding(4)
                             .foregroundColor((row + column) % 2 == 1 ? .white : .red)
                             .frame(width: 30, height: 30)
+                            .shadow(radius: 5)
                     }
                 }
             }

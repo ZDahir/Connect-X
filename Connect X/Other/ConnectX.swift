@@ -13,10 +13,9 @@ import AlertToast
 struct ConnectX: App {
     @AppStorage("isOnboardingComplete") private var isOnboardingComplete = false
     @State var showAlert = false
+
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
+        let schema = Schema([Item.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
@@ -31,21 +30,20 @@ struct ConnectX: App {
             VStack {
                 if isOnboardingComplete {
                     ContentView()
+                        .navigationViewStyle(StackNavigationViewStyle())
                 } else {
                     OnboardingView(isOnboardingComplete: $isOnboardingComplete)
                 }
             }
             .toast(isPresenting: $showAlert) {
-                AlertToast(displayMode: .alert, type: .complete(.green), title: "Get Set Connect...")
+                AlertToast(displayMode: .alert, type: .complete(.green), title: "Connect X")
             }
-            .onChange(of: isOnboardingComplete){ value1, value2 in
-                if isOnboardingComplete {
+            .onChange(of: isOnboardingComplete) { oldValue, newValue in
+                if newValue {
                     showAlert = true
                 }
             }
         }
         .modelContainer(sharedModelContainer)
-        
     }
 }
- 

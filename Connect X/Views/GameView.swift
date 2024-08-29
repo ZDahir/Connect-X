@@ -14,17 +14,11 @@ struct WinCountStyle: ViewModifier {
             .padding()
             .frame(maxWidth: .infinity)
             .background(
-//                ZStack {
-//                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
-//                    RoundedRectangle(cornerRadius: 8)
-//                        .stroke(Color.blue, lineWidth: 2)
-//                }
                 Color(hex: "2F3C7E")
             )
             .foregroundColor(.white)
             .cornerRadius(30)
             .shadow(radius: 5)
-        
     }
 }
 
@@ -40,7 +34,6 @@ struct GameView: View {
 
     var body: some View {
         ZStack {
-//            Color(hex: "FBEAEB")
             GeometryReader { geometry in
                 VStack {
                     tallyView
@@ -53,22 +46,10 @@ struct GameView: View {
                 .padding(.all, 10)
             }
             .toast(isPresenting: $viewModel.showingAlert) {
-                
-                // .alert is the default displayMode
                 AlertToast(type: .regular, title: "\(viewModel.gameSettings.playerNames[viewModel.winner ?? 0] ?? "") wins!")
-                
-                //Choose .hud to toast alert from the top of the screen
-                //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
-                
-                //Choose .banner to slide/pop alert from the bottom of the screen
-                //AlertToast(displayMode: .banner(.slide), type: .regular, title: "Message Sent!")
-                
             }
         }
         .background(colorScheme == .dark ? Color(white: 0.05) : Color.comfortWhite)
-        // Adjusted background color for dark mode
-
-      
     }
 
     private var tallyView: some View {
@@ -90,7 +71,7 @@ struct GameView: View {
                     viewModel.undoMove()
                 } label: {
                     HStack {
-                        Image(.undoIcon)
+                        Image(systemName: "arrow.uturn.backward")
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 15, height: 15)
@@ -103,7 +84,7 @@ struct GameView: View {
                     viewModel.resetWins()
                 } label: {
                     HStack {
-                        Image(.resetIcon)
+                        Image(systemName: "arrow.clockwise")
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 15, height: 15)
@@ -125,6 +106,7 @@ struct GameView: View {
         let totalHeight = geometry.size.height * 2 / 3
         let totalWidth = geometry.size.width * 0.9
         let cellSize = min(totalWidth / CGFloat(viewModel.gameSettings.columns), totalHeight / CGFloat(viewModel.gameSettings.rows))
+        print("Board Color: \(viewModel.gameSettings.boardColor)") // Should print "blue"
 
         return ZStack {
             VStack(spacing: 0) {
@@ -133,40 +115,35 @@ struct GameView: View {
                         ForEach(0..<viewModel.board[row].count, id: \.self) { column in
                             ZStack {
                                 Circle()
-                                    .padding(.all, 5)
+                                    .padding(.all, 7)
                                     .foregroundColor(getColor(for: row, column: column))
                                     .frame(width: cellSize, height: cellSize)
                                     .onTapGesture {
                                         viewModel.dropPiece(in: column)
                                     }
-                                
-                                // Check if the current position is a winning position
+
                                 if viewModel.winningPositions.contains(where: { $0 == (row, column) }) {
                                     Text("★")
                                         .font(.largeTitle)
-                                        .foregroundColor(.orange)
+                                        .foregroundColor(viewModel.gameSettings.starColor)
                                 }
                             }
                         }
                     }
                 }
+                
             }
-            .background(Color(hex: "2F3C7E"))
+           
+           
+
+            .background(viewModel.gameSettings.boardColor)
             .cornerRadius(15)
             .shadow(radius: 5)
+            
+            
+            
         }
         .frame(width: totalWidth, height: totalHeight)
-    }
-
-
-
-
-
-    private var adBanner: some View {
-        Rectangle()
-            .frame(height: 50)
-            .foregroundColor(.gray)
-            .overlay(Text("Ad Banner Here").foregroundColor(.white))
     }
 
     private func getColor(for row: Int, column: Int) -> Color {
@@ -181,11 +158,6 @@ struct GameButtonStyle: ButtonStyle {
             .padding()
             .frame(maxWidth: .infinity)
             .background(
-                //                ZStack {
-                //                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.blue]), startPoint: .top, endPoint: .bottom)
-                //                    RoundedRectangle(cornerRadius: 8)
-                //                        .stroke(Color.blue, lineWidth: 2)
-                //                }
                 Color(hex: "2F3C7E")
             )
             .foregroundColor(.white)
