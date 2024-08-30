@@ -27,7 +27,7 @@ struct SettingsView: View {
                 Form {
 
 
-                    Section(header: Text("Grid Settings").font(.headline)) {
+                    Section(header: Text("Board Settings").font(.headline)) {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text("Rows")
@@ -152,9 +152,28 @@ struct SettingsView: View {
         
 
                     Section(header: Text("More Options").font(.headline)) {
+                        Button(action: aboutDev) {
+                            HStack {
+                                Text("About the Developer")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                            }
+                        }
+                        .font(.title3)
+                        .fontWeight(.semibold)
                         Button(action: openLinktoSource) {
                             HStack {
                                 Text("Open Source Code")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                            }
+                        }
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        
+                        Button(action: shareApp) {
+                            HStack {
+                                Text("Share the app")
                                 Spacer()
                                 Image(systemName: "chevron.right")
                             }
@@ -172,15 +191,7 @@ struct SettingsView: View {
                         .font(.title3)
                         .fontWeight(.semibold)
 
-                        Button(action: shareApp) {
-                            HStack {
-                                Text("Share the app")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                            }
-                        }
-                        .font(.title3)
-                        .fontWeight(.semibold)
+                        
                     }
                 }
                 .background(Color.clear)
@@ -217,13 +228,20 @@ struct SettingsView: View {
     }
 
     func privacyPolicy() {
-        if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
+        if let url = URL(string: "https://connectxapp.weebly.com/privacy-policy.html") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    func aboutDev() {
+        if let url = URL(string: "https://www.linkedin.com/in/zaiddahir/") {
             UIApplication.shared.open(url)
         }
     }
 
+
     func openLinktoSource() {
-        if let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID?action=write-review") {
+        if let url = URL(string: "https://github.com/ZDahir/Connect-X") {
             UIApplication.shared.open(url)
         }
     }

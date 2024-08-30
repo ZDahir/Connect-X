@@ -106,7 +106,8 @@ struct GameView: View {
         let totalHeight = geometry.size.height * 2 / 3
         let totalWidth = geometry.size.width * 0.9
         let cellSize = min(totalWidth / CGFloat(viewModel.gameSettings.columns), totalHeight / CGFloat(viewModel.gameSettings.rows))
-        print("Board Color: \(viewModel.gameSettings.boardColor)") // Should print "blue"
+        let starFontSize = cellSize * 0.5
+        
 
         return ZStack {
             VStack(spacing: 0) {
@@ -124,7 +125,7 @@ struct GameView: View {
 
                                 if viewModel.winningPositions.contains(where: { $0 == (row, column) }) {
                                     Text("★")
-                                        .font(.largeTitle)
+                                        .font(.system(size: starFontSize))
                                         .foregroundColor(viewModel.gameSettings.starColor)
                                 }
                             }
