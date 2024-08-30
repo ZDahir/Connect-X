@@ -1,3 +1,5 @@
+# Connect-X
+
 ---
 
 ### Screen Shots
@@ -54,5 +56,5 @@
 - LinkedIn - [Zaid Dahir](https://linkedin.com/in/zaiddahir)
 - Contact - [ZaidmDahir@gmail.com](mailto:zaidmdahir@gmail.com)
 
-[Back To The Top](#connectx)
+[Back To The Top](#Connect-X)
 
